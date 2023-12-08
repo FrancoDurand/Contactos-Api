@@ -1,0 +1,35 @@
+# Dependencias
+/node_modules
+
+# Archivos generados por npm
+package-lock.json
+npm-debug.log
+
+# Archivos de registro
+logs
+*.log
+
+# Archivos de compilación
+/dist
+/build
+
+# Archivos de entorno
+.env
+.env.local
+.env.*.local
+.env.test
+.env.prod
+
+# Archivos de respaldo
+*.bak
+*.swp
+*~
+
+# Archivos de configuración de IDE
+.idea
+.vscode
+*.sublime-project
+*.sublime-workspace
+
+# Archivos de caché
+/.cache
