@@ -19,17 +19,18 @@ class User implements IUser {
         this.password = user.password || "";
     }
 
-    public async register(res: Response): Promise<boolean> {
+    public async register(res: Response): Promise<string> {
         try {
             const db = Database.getInstance();
             const registerResult: ResultSetHeader = await db.register(this);
 
             if (registerResult.affectedRows > 0) {
-                const loginResult: IUserRow[] = await db.login(this);
-                generateJWT(loginResult[0], res);
-                return true;
+                /* const loginResult: IUserRow[] = await db.login(this);
+                const token = generateJWT(loginResult[0], res);
+                return token; */
+                return this.login(res);
             }
-            else return false;
+            else return "";
         }
         catch (e) {
             throw e;
@@ -37,17 +38,17 @@ class User implements IUser {
         } //TODO: validar si el usuario ya existe
     }
 
-    public async login(res: Response): Promise<boolean> {
+    public async login(res: Response): Promise<string> {
         try {
             const db = Database.getInstance();
             const loginResult: IUserRow[] = await db.login(this);
 
             if (loginResult.length > 0) {
-                generateJWT(loginResult[0], res);
-                return true;
+                const token = generateJWT(loginResult[0], res);
+                return token;
                 //res.status(200).json({ message: "Login successful" });
             }
-            else return false;
+            else return "";
             //res.status(401).json({ message: "Invalid credentials" });
         }
         catch (e) {

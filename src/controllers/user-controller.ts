@@ -17,7 +17,7 @@ class UserController {
             const registerResult = await user.register(res);
 
             if (registerResult)
-                res.status(200).json({ message: "Register successful" });
+                res.status(200).json({ message: "Register successful", token: registerResult });
             else
                 res.status(401).json({ message: "Invalid credentials" });
         }
@@ -39,7 +39,7 @@ class UserController {
             const loginResult = await user.login(res);
 
             if (loginResult)
-                res.status(200).json({ message: "Login successful" });
+                res.status(200).json({ token: loginResult });
             else
                 res.status(401).json({ message: "Invalid credentials" });
         }

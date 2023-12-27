@@ -14,8 +14,8 @@ function generateJWT(user: IUser, res: Response) {
     const payload = { id: user.id };
 
     const token = jwt.sign(payload, privateKey, { algorithm: 'RS256' });
-
     res.append('Authorization', token);
+    return token;
 }
 
 function validateJWT(req: Request, res: Response, next: Function) {
